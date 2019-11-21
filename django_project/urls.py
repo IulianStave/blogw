@@ -15,11 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from users import views as user_views
 
 # / - trailing slash
 urlpatterns = [
     path(r'admin/', admin.site.urls),
-    #path(r'blog/', include('blog.urls')),
+    path(r'register/', user_views.register, name = 'register'),
     path(r'', include('blog.urls')),
     
 ]
