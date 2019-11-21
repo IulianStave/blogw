@@ -1,6 +1,7 @@
 # blog.apps.BlogConfig should be added to project apps.py, within INSTALLED_APPS
 from django.shortcuts import render
-
+from .models import Post
+"""
 posts = [
     {
         'author': 'Iulian Stave',
@@ -15,11 +16,10 @@ posts = [
         'date_posted': 'August 3, 2019'
     }
 ]
-
-
+"""
 def home(request):
     context = {
-        'posts': posts,
+        'posts': Post.objects.all(),
         'title': 'Blog start',
     }
     return render(request, 'blog/home.html', context)
