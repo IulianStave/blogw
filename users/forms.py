@@ -1,6 +1,6 @@
 """
 Create a form that inherits from UserCreationForm
-and add email field named 'email' to the default UserCreationForm
+and add email address field named 'email' to the default UserCreationForm
 pip3 install django-crispy-forms
 """
 
