@@ -1,28 +1,35 @@
 # blog.apps.BlogConfig should be added to project apps.py, within INSTALLED_APPS
 from django.shortcuts import render
+from django.views.generic import ListView, DetailView, CreateView
+
 from .models import Post
-"""
-posts = [
-    {
-        'author': 'Iulian Stave',
-        'title': 'First blog post',
-        'content':'First post content',
-        'date_posted': 'August 27, 2018'
-    },
-    {
-        'author': 'John Smith',
-        'title': 'Second post',
-        'content':'Second post content',
-        'date_posted': 'August 3, 2019'
-    }
-]
-"""
+
 def home(request):
     context = {
         'posts': Post.objects.all(),
         'title': 'Blog start',
     }
     return render(request, 'blog/home.html', context)
+
+#class based view
+class PostListView(ListView):
+    model = Post
+    template_name = 'blog/home.html'
+    #<app>/<model>_<viewtype>.html = > blog/post_list.html
+    context_object_name = 'posts'
+    ordering = ['-date_posted'] # show the newest first
+
+class PostDetailView(DetailView):
+    model = Post
+
+class PostCreateView(CreateView):
+    model = Post
+    fields = ['title','content']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
 
 def about(request):
     return render(request, 'blog/about.html', {'title':'About page'})
