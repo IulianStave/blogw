@@ -2,5 +2,6 @@
 /blog/migrations
 /django_project/__pycache__
 __pycache__
+media/profile_pics
 
 db.sqlite3
