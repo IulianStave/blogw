@@ -24,6 +24,7 @@ class PostListView(ListView):
     #<app>/<model>_<viewtype>.html = > blog/post_list.html
     context_object_name = 'posts'
     ordering = ['-date_posted'] # show the newest first
+    paginate_by = 5
 
 class PostDetailView(DetailView):
     model = Post
